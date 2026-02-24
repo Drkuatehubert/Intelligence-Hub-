@@ -151,7 +151,8 @@
     "techHubs": "Pôles Technologiques",
     "gccInvestments": "Investissements du CCG",
     "geoHubs": "Centres géopolitiques",
-    "liveWebcams": "Webcams en Direct"
+    "liveWebcams": "Webcams en Direct",
+    "commandConsole": "Console Tactique"
   },
   "modals": {
     "search": {
@@ -694,6 +695,7 @@
         "climateAnomalies": "Anomalies climatiques",
         "weatherAlerts": "Alertes météo",
         "strategicWaterways": "Voies navigables stratégiques",
+        "rfSignals": "Signaux RF (WireTapper)",
         "economicCenters": "Centres économiques",
         "criticalMinerals": "Minéraux critiques",
         "stockExchanges": "Bourses",

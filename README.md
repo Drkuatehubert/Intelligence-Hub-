@@ -1,6 +1,6 @@
-# World Monitor
+# Tactical Intelligence Monolith
 
-**Real-time global intelligence dashboard** — AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface.
+**Real-time unified intelligence ecosystem** — Integrating World Monitor, GeoSentinel, WireTapper, PentAGI, and PentestGPT into a single high-density tactical interface.
 
 [![GitHub stars](https://img.shields.io/github/stars/koala73/worldmonitor?style=social)](https://github.com/koala73/worldmonitor/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/koala73/worldmonitor?style=social)](https://github.com/koala73/worldmonitor/network/members)
@@ -59,11 +59,18 @@
 | **Wireless Intel**  | Local Only                                                   | OSINT, signal intelligence, WiFi/BT mapping      |
 | **Security Ops**    | Local Only                                                   | Autonomous pentesting, vulnerability mapping     |
 
-All variants run from a single monolithic codebase — switch between them via the header bar.
+This project is a **Monolithic Integration** of five distinct intelligence and security platforms, unified by a **Palantir-inspired** high-density tactical UI.
 
 ---
 
 ## Key Features
+
+### Tactical UI & Palantir Integration
+
+- **Palantir-Inspired Aesthetic** — High-density, tactical dark interface ("Gotham" style) designed for professional situational awareness and intelligence analysis.
+- **Unified Command Console** — Integrated terminal for interacting with AI agents (GeoSential AI, PentAGI) and executing cross-platform OSINT searches.
+- **Dynamic Relationship Mapping** — Node-link visualizations of entity connections, vulnerability chains, and signal correlations.
+- **Signal Intelligence Layer** — Specialized map visualization for passive RF signal detections (WiFi, BT, Cellular) from WireTapper.
 
 ### Localization & Regional Support
 
@@ -1218,12 +1225,15 @@ Transactions are sampled at 10% to balance observability with cost. Release trac
 
 ---
 
-## Monolithic Architecture (Docker)
+## Tactical Integration Monolith (Docker)
 
-The project is now a monolith including multiple integrated backends:
-- **GeoSentinel**: Geospatial tracking and AI OSINT.
-- **WireTapper**: Wireless signal intelligence.
-- **PentAGI / PentestGPT**: Autonomous security operations.
+The project unifies five major platforms into a single orchestrated ecosystem:
+
+- **World Monitor**: Geopolitical intelligence and infrastructure tracking.
+- **GeoSentinel**: Real-time flight/vessel tracking and AI-driven OSINT.
+- **WireTapper**: Passive wireless signal intelligence (WiFi, Bluetooth, RF).
+- **PentAGI**: Autonomous AI-powered security testing and vulnerability mapping.
+- **PentestGPT**: LLM-driven interactive penetration testing assistant.
 
 ### Quick Start (Docker)
 

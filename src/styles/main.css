@@ -6,26 +6,28 @@
    Theme Colors — overridden by [data-theme="light"] below
    ============================================================ */
 :root {
-  /* Backgrounds */
-  --bg: #0a0a0a;
-  --bg-secondary: #111;
-  --surface: #141414;
-  --surface-hover: #1e1e1e;
-  --surface-active: #1a1a2e;
+  /* Backgrounds - Tactical Dark */
+  --bg: #040508;
+  --bg-secondary: #0a0c10;
+  --surface: #0d1117;
+  --surface-hover: #161b22;
+  --surface-active: #1f2937;
 
-  /* Borders */
-  --border: #2a2a2a;
-  --border-strong: #444;
-  --border-subtle: #1a1a1a;
+  /* Borders - High Contrast Tactical */
+  --border: #30363d;
+  --border-strong: #484f58;
+  --border-subtle: #21262d;
+  --border-glow: rgba(56, 139, 253, 0.4);
 
-  /* Text */
-  --text: #e8e8e8;
-  --text-secondary: #ccc;
-  --text-dim: #888;
-  --text-muted: #666;
-  --text-faint: #555;
-  --text-ghost: #444;
-  --accent: #fff;
+  /* Text - Gotham Palette */
+  --text: #c9d1d9;
+  --text-secondary: #8b949e;
+  --text-dim: #6e7681;
+  --text-muted: #484f58;
+  --text-faint: #30363d;
+  --text-ghost: #21262d;
+  --accent: #58a6ff;
+  --accent-glow: rgba(88, 166, 255, 0.3);
 
   /* Overlays & shadows */
   --overlay-subtle: rgba(255, 255, 255, 0.03);
@@ -48,11 +50,11 @@
   --panel-bg: #141414;
   --panel-border: #2a2a2a;
 
-  /* Map */
-  --map-bg: #020a08;
-  --map-grid: #0a2a20;
-  --map-country: #0a2018;
-  --map-stroke: #0f5040;
+  /* Map - High Contrast */
+  --map-bg: #010409;
+  --map-grid: #161b22;
+  --map-country: #0d1117;
+  --map-stroke: #30363d;
 
   /* Font stack */
   --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Fira Code', 'DejaVu Sans Mono', 'Liberation Mono', monospace;
@@ -69,23 +71,23 @@
 }
 
 /* ============================================================
-   Semantic Colors — dark-mode defaults, light overrides below
+   Semantic Colors — Tactical / OSINT Palette
    ============================================================ */
 :root {
-  /* Severity levels */
-  --semantic-critical: #ff4444;
-  --semantic-high: #ff8800;
-  --semantic-elevated: #ffaa00;
-  --semantic-normal: #44aa44;
-  --semantic-low: #3388ff;
-  --semantic-info: #3b82f6;
+  /* Severity levels - Tactical Muted */
+  --semantic-critical: #f85149;
+  --semantic-high: #f0883e;
+  --semantic-elevated: #dbab09;
+  --semantic-normal: #3fb950;
+  --semantic-low: #58a6ff;
+  --semantic-info: #79c0ff;
 
-  /* Threat levels */
-  --threat-critical: #ef4444;
-  --threat-high: #f97316;
-  --threat-medium: #eab308;
-  --threat-low: #22c55e;
-  --threat-info: #3b82f6;
+  /* Threat levels - Tactical High Contrast */
+  --threat-critical: #ff7b72;
+  --threat-high: #ffa657;
+  --threat-medium: #d4bbff;
+  --threat-low: #7ee787;
+  --threat-info: #a5d6ff;
 
   /* DEFCON levels */
   --defcon-1: #ff0040;
@@ -813,9 +815,15 @@ canvas,
   height: 100%;
   min-height: 200px;
   cursor: grab;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.3s;
   position: relative;
   contain: content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.panel:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--border-glow);
 }
 
 /* .panel.resized: Custom height set - use grid-row span for height */
@@ -901,12 +909,13 @@ canvas,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 10px;
-  background: var(--overlay-subtle);
-  border-bottom: 1px solid var(--border);
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-strong);
   flex-shrink: 0;
   position: relative;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-family: var(--font-mono);
 }
 
 .panel-header-error {

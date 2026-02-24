@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Polygon", "coordinates": [[[30, 20], [50, 20], [50, 40], [30, 40], [30, 20]]] },
+      "properties": { "id": "grid_mena_1", "name": "MENA Sector Alpha", "status": "Active", "priority": "High" }
+    }
+  ]
+}

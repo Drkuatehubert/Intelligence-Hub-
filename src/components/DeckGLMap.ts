@@ -33,6 +33,7 @@ import type {
   MapDatacenterCluster,
   CyberThreat,
   CableHealthRecord,
+  RFSignal,
 } from '@/types';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { DisplacementFlow } from '@/services/displacement';
@@ -268,6 +269,7 @@ export class DeckGLMap {
   private ucdpEvents: UcdpGeoEvent[] = [];
   private displacementFlows: DisplacementFlow[] = [];
   private climateAnomalies: ClimateAnomaly[] = [];
+  private rfSignals: RFSignal[] = [];
 
   // Country highlight state
   private countryGeoJsonLoaded = false;
@@ -1138,6 +1140,11 @@ export class DeckGLMap {
     // Gulf FDI investments layer
     if (mapLayers.gulfInvestments) {
       layers.push(this.createGulfInvestmentsLayer());
+    }
+
+    // RF Signals layer (WireTapper integration)
+    if (mapLayers.rfSignals && this.rfSignals.length > 0) {
+      layers.push(this.createRfSignalsLayer());
     }
 
     // News geo-locations (always shown if data exists)
@@ -2162,6 +2169,29 @@ export class DeckGLMap {
     return layers;
   }
 
+  private createRfSignalsLayer(): Layer {
+    return new ScatterplotLayer<RFSignal>({
+      id: 'rf-signals-layer',
+      data: this.rfSignals,
+      getPosition: d => [d.lon, d.lat],
+      getRadius: d => (100 + d.strength) * 100, // Radius based on strength
+      radiusMinPixels: 4,
+      radiusMaxPixels: 20,
+      getFillColor: d => {
+        switch (d.type) {
+          case 'wifi': return [0, 255, 120, 180] as [number, number, number, number];
+          case 'bluetooth': return [0, 120, 255, 180] as [number, number, number, number];
+          case 'cellular': return [255, 120, 0, 180] as [number, number, number, number];
+          default: return [255, 255, 255, 150] as [number, number, number, number];
+        }
+      },
+      pickable: true,
+      stroked: true,
+      getLineColor: [255, 255, 255, 100],
+      lineWidthMinPixels: 1,
+    });
+  }
+
   private createGulfInvestmentsLayer(): ScatterplotLayer {
     return new ScatterplotLayer<GulfInvestment>({
       id: 'gulf-investments-layer',
@@ -2432,6 +2462,8 @@ export class DeckGLMap {
         return { html: `<div class="deckgl-tooltip"><strong>${text(obj.name)}</strong><br/>${text(obj.aka)}<br/>${t('popups.sponsor')}: ${text(obj.sponsor)}</div>` };
       case 'minerals-layer':
         return { html: `<div class="deckgl-tooltip"><strong>${text(obj.name)}</strong><br/>${text(obj.mineral)} - ${text(obj.country)}<br/>${text(obj.operator)}</div>` };
+      case 'rf-signals-layer':
+        return { html: `<div class="deckgl-tooltip"><strong>${text(obj.type).toUpperCase()}: ${text(obj.name || obj.ssid || obj.mac)}</strong><br/>${t('modals.signal.confidence')}: ${text(obj.strength)} dBm</div>` };
       case 'ais-disruptions-layer':
         return { html: `<div class="deckgl-tooltip"><strong>AIS ${text(obj.type || t('components.deckgl.tooltip.disruption'))}</strong><br/>${text(obj.severity)} ${t('popups.severity')}<br/>${text(obj.description)}</div>` };
       case 'cable-advisories-layer': {
@@ -2769,6 +2801,7 @@ export class DeckGLMap {
         { key: 'techEvents', label: t('components.deckgl.layers.techEvents'), icon: '&#128197;' },
         { key: 'natural', label: t('components.deckgl.layers.naturalEvents'), icon: '&#127755;' },
         { key: 'fires', label: t('components.deckgl.layers.fires'), icon: '&#128293;' },
+        { key: 'rfSignals', label: t('components.deckgl.layers.rfSignals'), icon: '&#128246;' },
       ]
       : SITE_VARIANT === 'finance'
       ? [
@@ -2785,6 +2818,7 @@ export class DeckGLMap {
           { key: 'waterways', label: t('components.deckgl.layers.strategicWaterways'), icon: '&#9875;' },
           { key: 'natural', label: t('components.deckgl.layers.naturalEvents'), icon: '&#127755;' },
           { key: 'cyberThreats', label: t('components.deckgl.layers.cyberThreats'), icon: '&#128737;' },
+          { key: 'rfSignals', label: t('components.deckgl.layers.rfSignals'), icon: '&#128246;' },
         ]
       : [
         { key: 'hotspots', label: t('components.deckgl.layers.intelHotspots'), icon: '&#127919;' },
@@ -2809,6 +2843,7 @@ export class DeckGLMap {
         { key: 'natural', label: t('components.deckgl.layers.naturalEvents'), icon: '&#127755;' },
         { key: 'fires', label: t('components.deckgl.layers.fires'), icon: '&#128293;' },
         { key: 'waterways', label: t('components.deckgl.layers.strategicWaterways'), icon: '&#9875;' },
+        { key: 'rfSignals', label: t('components.deckgl.layers.rfSignals'), icon: '&#128246;' },
         { key: 'economic', label: t('components.deckgl.layers.economicCenters'), icon: '&#128176;' },
         { key: 'minerals', label: t('components.deckgl.layers.criticalMinerals'), icon: '&#128142;' },
       ];
@@ -3350,6 +3385,11 @@ export class DeckGLMap {
 
   public setClimateAnomalies(anomalies: ClimateAnomaly[]): void {
     this.climateAnomalies = anomalies;
+    this.render();
+  }
+
+  public setRfSignals(signals: RFSignal[]): void {
+    this.rfSignals = signals;
     this.render();
   }
 

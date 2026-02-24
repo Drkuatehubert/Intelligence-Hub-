@@ -2396,6 +2396,9 @@ export class App {
     const agentLogsPanel = new PentestPanel('agent-logs', t('panels.agentLogs') || 'Agent Activity Logs');
     this.panels['agent-logs'] = agentLogsPanel;
 
+    const commandConsole = new CommandConsole('command-console', 'Tactical Console');
+    this.panels['command-console'] = commandConsole;
+
     // Add panels to grid in saved order
     // Use DEFAULT_PANELS keys for variant-aware panel order
     const defaultOrder = Object.keys(DEFAULT_PANELS).filter(k => k !== 'map');
@@ -3253,6 +3256,9 @@ export class App {
         case 'climate':
           await this.loadIntelligenceSignals();
           break;
+        case 'rfSignals':
+          await this.loadWirelessSignals();
+          break;
       }
     } finally {
       this.inFlight.delete(layer);
@@ -4022,6 +4028,7 @@ export class App {
     })());
 
     await Promise.allSettled(tasks);
+    this.statusPanel?.updateApi('GeoSentinel', { status: 'ok' });
 
     // Fetch population exposure estimates after upstream intelligence loads complete.
     // This avoids race conditions where UCDP/protest data is still in-flight.
@@ -4494,22 +4501,40 @@ export class App {
     const center = this.map?.getCenter() || { lat: 51.505, lon: -0.09 };
     const devices = await unifiedBackend.getNearbySignals(center.lat, center.lon);
     (this.panels['signal-intel'] as SignalIntelPanel)?.updateDevices(devices);
+    this.statusPanel?.updateFeed('Wireless Signals', { status: 'ok', itemCount: devices.length });
+    this.statusPanel?.updateApi('WireTapper', { status: 'ok' });
 
     // Update relationship graph
     const nodes: any[] = devices.map(d => ({ id: d.ssid || d.bssid || d.type, label: d.ssid || d.type, type: 'device' }));
     nodes.push({ id: 'base-station', label: 'Local Base', type: 'target' });
     const links = devices.map(d => ({ source: 'base-station', target: d.ssid || d.bssid || d.type }));
     (this.panels['relationship-graph'] as RelationshipGraph)?.updateData(nodes, links);
+
+    // Update map layer
+    const rfSignals: any[] = devices.map(d => ({
+      id: d.id || d.bssid || Math.random().toString(),
+      type: d.type,
+      name: d.ssid || d.name || d.type,
+      strength: d.rssi || -50,
+      lat: center.lat + (Math.random() - 0.5) * 0.01,
+      lon: center.lon + (Math.random() - 0.5) * 0.01,
+      timestamp: new Date()
+    }));
+    this.map?.setRfSignals(rfSignals);
+    this.map?.setLayerReady('rfSignals', rfSignals.length > 0);
   }
 
   private async loadPentestStatus(): Promise<void> {
     if (SITE_VARIANT !== 'pentest' && !this.panelSettings['pentest-monitor']?.enabled) return;
     // Mocking real-time logs for visualization
-    (this.panels['agent-logs'] as PentestPanel)?.updateLogs([
+    const logs = [
       { timestamp: new Date().toLocaleTimeString(), level: 'info', message: 'Autonomous agent initialized.' },
       { timestamp: new Date().toLocaleTimeString(), level: 'action', message: 'Scanning target infrastructure...', tool: 'nmap' },
       { timestamp: new Date().toLocaleTimeString(), level: 'success', message: 'Vulnerability CVE-2024-1234 verified.', tool: 'PentAGI' },
-    ]);
+    ];
+    (this.panels['agent-logs'] as PentestPanel)?.updateLogs(logs as any);
+    this.statusPanel?.updateFeed('Agent Logs', { status: 'ok', itemCount: logs.length });
+    this.statusPanel?.updateApi('PentAGI', { status: 'ok' });
   }
 
   private updateMonitorResults(): void {

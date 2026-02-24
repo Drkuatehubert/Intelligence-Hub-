@@ -317,6 +317,12 @@ export class MapContainer {
     }
   }
 
+  public setRfSignals(signals: RFSignal[]): void {
+    if (this.useDeckGL) {
+      this.deckGLMap?.setRfSignals(signals);
+    }
+  }
+
   public setCyberThreats(threats: CyberThreat[]): void {
     if (this.useDeckGL) {
       this.deckGLMap?.setCyberThreats(threats);

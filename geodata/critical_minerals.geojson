@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [116.01, -33.86] },
+      "properties": { "id": "greenbushes", "name": "Greenbushes", "mineral": "Lithium", "country": "Australia", "dataType": "mineral" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-68.33, -23.50] },
+      "properties": { "id": "atacama", "name": "Salar de Atacama", "mineral": "Lithium", "country": "Chile", "dataType": "mineral" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.80, -10.78] },
+      "properties": { "id": "mutanda", "name": "Mutanda", "mineral": "Cobalt", "country": "DRC", "dataType": "mineral" }
+    }
+  ]
+}

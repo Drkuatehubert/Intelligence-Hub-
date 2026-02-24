@@ -261,3 +261,122 @@
 .node-group circle {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
+
+/* High-Density Tactical Tables */
+.tactical-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.tactical-table th {
+  text-align: left;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.tactical-table td {
+  padding: 4px 8px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tactical-table tr:hover td {
+  background: var(--surface-hover);
+  border-color: var(--accent-glow);
+}
+
+.tactical-badge {
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+
+/* Dense News Items */
+.item.dense {
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-source.dense {
+  min-width: 80px;
+  margin-bottom: 0;
+}
+
+.item-title.dense {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* Command Console */
+.command-console {
+  background: rgba(5, 10, 20, 0.95) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.terminal-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 32px);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.terminal-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  scrollbar-width: thin;
+}
+
+.terminal-line {
+  margin-bottom: 4px;
+}
+
+.terminal-line.system { color: #4488ff; }
+.terminal-line.user { color: #fff; }
+.terminal-line.ai { color: #44ff88; }
+.terminal-line.error { color: #ff4444; }
+.terminal-line.ai-pending { color: #ffff44; font-style: italic; }
+
+.line-timestamp { opacity: 0.5; margin-right: 6px; }
+.line-source { font-weight: bold; margin-right: 6px; }
+
+.terminal-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 0;
+}
+
+.prompt {
+  color: #4488ff;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.terminal-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}

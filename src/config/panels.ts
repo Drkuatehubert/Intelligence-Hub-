@@ -8,43 +8,44 @@ import { SITE_VARIANT } from './variant';
 // Panel order matters! First panels appear at top of grid.
 // Desired order: live-news, AI Insights, AI Strategic Posture, cii, strategic-risk, then rest
 const FULL_PANELS: Record<string, PanelConfig> = {
-  map: { name: 'Global Map', enabled: true, priority: 1 },
-  'live-news': { name: 'Live News', enabled: true, priority: 1 },
-  'live-webcams': { name: 'Live Webcams', enabled: true, priority: 1 },
-  insights: { name: 'AI Insights', enabled: true, priority: 1 },
-  'strategic-posture': { name: 'AI Strategic Posture', enabled: true, priority: 1 },
-  cii: { name: 'Country Instability', enabled: true, priority: 1 },
-  'strategic-risk': { name: 'Strategic Risk Overview', enabled: true, priority: 1 },
-  intel: { name: 'Intel Feed', enabled: true, priority: 1 },
-  'gdelt-intel': { name: 'Live Intelligence', enabled: true, priority: 1 },
-  cascade: { name: 'Infrastructure Cascade', enabled: true, priority: 1 },
-  politics: { name: 'World News', enabled: true, priority: 1 },
-  middleeast: { name: 'Middle East', enabled: true, priority: 1 },
-  africa: { name: 'Africa', enabled: true, priority: 1 },
-  latam: { name: 'Latin America', enabled: true, priority: 1 },
-  asia: { name: 'Asia-Pacific', enabled: true, priority: 1 },
-  energy: { name: 'Energy & Resources', enabled: true, priority: 1 },
-  gov: { name: 'Government', enabled: true, priority: 1 },
-  thinktanks: { name: 'Think Tanks', enabled: true, priority: 1 },
-  polymarket: { name: 'Predictions', enabled: true, priority: 1 },
-  commodities: { name: 'Commodities', enabled: true, priority: 1 },
-  markets: { name: 'Markets', enabled: true, priority: 1 },
-  economic: { name: 'Economic Indicators', enabled: true, priority: 1 },
-  finance: { name: 'Financial', enabled: true, priority: 1 },
-  tech: { name: 'Technology', enabled: true, priority: 2 },
+  map: { name: 'Global Intelligence Map', enabled: true, priority: 1 },
+  'live-news': { name: 'Situation Mondiale', enabled: true, priority: 1 },
+  'live-webcams': { name: 'Webcams en Direct', enabled: true, priority: 1 },
+  insights: { name: 'Insights IA', enabled: true, priority: 1 },
+  'strategic-posture': { name: 'Posture Stratégique IA', enabled: true, priority: 1 },
+  cii: { name: 'Instabilité Pays', enabled: true, priority: 1 },
+  'strategic-risk': { name: 'Vue d\'ensemble des Risques Stratégiques', enabled: true, priority: 1 },
+  intel: { name: 'Flux de Renseignements', enabled: true, priority: 1 },
+  'gdelt-intel': { name: 'Renseignements en Direct', enabled: true, priority: 1 },
+  cascade: { name: 'Cascade d\'Infrastructure', enabled: true, priority: 1 },
+  politics: { name: 'Actualités Mondiales', enabled: true, priority: 1 },
+  middleeast: { name: 'Moyen-Orient', enabled: true, priority: 1 },
+  africa: { name: 'Afrique', enabled: true, priority: 1 },
+  latam: { name: 'Amérique latine', enabled: true, priority: 1 },
+  asia: { name: 'Asie-Pacifique', enabled: true, priority: 1 },
+  energy: { name: 'Énergie & Ressources', enabled: true, priority: 1 },
+  gov: { name: 'Gouvernement', enabled: true, priority: 1 },
+  thinktanks: { name: 'Groupes de Réflexion', enabled: true, priority: 1 },
+  polymarket: { name: 'Prédictions', enabled: true, priority: 1 },
+  commodities: { name: 'Matières premières', enabled: true, priority: 1 },
+  markets: { name: 'Marchés', enabled: true, priority: 1 },
+  economic: { name: 'Indicateurs Économiques', enabled: true, priority: 1 },
+  finance: { name: 'Finance', enabled: true, priority: 1 },
+  tech: { name: 'Technologie', enabled: true, priority: 2 },
   crypto: { name: 'Crypto', enabled: true, priority: 2 },
-  heatmap: { name: 'Sector Heatmap', enabled: true, priority: 2 },
-  ai: { name: 'AI/ML', enabled: true, priority: 2 },
-  layoffs: { name: 'Layoffs Tracker', enabled: true, priority: 2 },
-  monitors: { name: 'My Monitors', enabled: true, priority: 2 },
-  'satellite-fires': { name: 'Fires', enabled: true, priority: 2 },
-  'macro-signals': { name: 'Market Radar', enabled: true, priority: 2 },
-  'etf-flows': { name: 'BTC ETF Tracker', enabled: true, priority: 2 },
+  heatmap: { name: 'Carte Thermique', enabled: true, priority: 2 },
+  ai: { name: 'IA/ML', enabled: true, priority: 2 },
+  layoffs: { name: 'Suivi des Licenciements', enabled: true, priority: 2 },
+  monitors: { name: 'Mes moniteurs', enabled: true, priority: 2 },
+  'satellite-fires': { name: 'Incendies', enabled: true, priority: 2 },
+  'macro-signals': { name: 'Radar de Marché', enabled: true, priority: 2 },
+  'etf-flows': { name: 'Suivi ETF BTC', enabled: true, priority: 2 },
   stablecoins: { name: 'Stablecoins', enabled: true, priority: 2 },
-  'ucdp-events': { name: 'UCDP Conflict Events', enabled: true, priority: 2 },
-  displacement: { name: 'UNHCR Displacement', enabled: true, priority: 2 },
-  climate: { name: 'Climate Anomalies', enabled: true, priority: 2 },
-  'population-exposure': { name: 'Population Exposure', enabled: true, priority: 2 },
+  'ucdp-events': { name: 'Conflits UCDP', enabled: true, priority: 2 },
+  displacement: { name: 'Déplacements HCR', enabled: true, priority: 2 },
+  climate: { name: 'Anomalies Climatiques', enabled: true, priority: 2 },
+  'population-exposure': { name: 'Exposition de la Population', enabled: true, priority: 2 },
+  'command-console': { name: 'Tactical Console', enabled: true, priority: 1 },
 };
 
 const FULL_MAP_LAYERS: MapLayers = {
@@ -70,6 +71,7 @@ const FULL_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,
@@ -111,6 +113,7 @@ const FULL_MOBILE_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,
@@ -167,6 +170,7 @@ const TECH_PANELS: Record<string, PanelConfig> = {
   'etf-flows': { name: 'BTC ETF Tracker', enabled: true, priority: 2 },
   stablecoins: { name: 'Stablecoins', enabled: true, priority: 2 },
   monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'command-console': { name: 'Tactical Console', enabled: true, priority: 1 },
 };
 
 const TECH_MAP_LAYERS: MapLayers = {
@@ -192,6 +196,7 @@ const TECH_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,
@@ -233,6 +238,7 @@ const TECH_MOBILE_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,
@@ -284,6 +290,7 @@ const FINANCE_PANELS: Record<string, PanelConfig> = {
   gccNews: { name: 'GCC Business News', enabled: true, priority: 2 },
   polymarket: { name: 'Predictions', enabled: true, priority: 2 },
   monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'command-console': { name: 'Tactical Console', enabled: true, priority: 1 },
 };
 
 const FINANCE_MAP_LAYERS: MapLayers = {
@@ -377,6 +384,7 @@ const WIRELESS_PANELS: Record<string, PanelConfig> = {
   'signal-intel': { name: 'Signal Intelligence', enabled: true, priority: 1 },
   'relationship-graph': { name: 'Entity Relationships', enabled: true, priority: 1 },
   monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'command-console': { name: 'Tactical Console', enabled: true, priority: 1 },
 };
 
 const WIRELESS_MAP_LAYERS: MapLayers = {
@@ -385,6 +393,7 @@ const WIRELESS_MAP_LAYERS: MapLayers = {
   outages: true,
   cyberThreats: true,
   datacenters: true,
+  rfSignals: true,
 };
 
 // ============================================
@@ -396,6 +405,7 @@ const PENTEST_PANELS: Record<string, PanelConfig> = {
   'agent-logs': { name: 'Agent Activity Logs', enabled: true, priority: 1 },
   'relationship-graph': { name: 'Vulnerability Graph', enabled: true, priority: 1 },
   'service-status': { name: 'Target Status', enabled: true, priority: 2 },
+  'command-console': { name: 'Tactical Console', enabled: true, priority: 1 },
 };
 
 const PENTEST_MAP_LAYERS: MapLayers = {

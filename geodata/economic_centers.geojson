@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-74.0089, 40.7069] },
+      "properties": { "id": "nyse", "name": "NYSE", "country": "USA", "dataType": "economic" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-0.0940, 51.5145] },
+      "properties": { "id": "lse", "name": "LSE", "country": "UK", "dataType": "economic" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.7744, 35.6830] },
+      "properties": { "id": "tse", "name": "Tokyo SE", "country": "Japan", "dataType": "economic" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [121.4737, 31.2304] },
+      "properties": { "id": "sse", "name": "Shanghai SE", "country": "China", "dataType": "economic" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.1577, 22.2833] },
+      "properties": { "id": "hkex", "name": "HKEX", "country": "Hong Kong", "dataType": "economic" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [46.7219, 24.6877] },
+      "properties": { "id": "tadawul", "name": "Tadawul", "country": "Saudi Arabia", "dataType": "economic" }
+    }
+  ]
+}

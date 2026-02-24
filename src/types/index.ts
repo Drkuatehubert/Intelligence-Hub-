@@ -502,6 +502,7 @@ export interface MapLayers {
   spaceports: boolean;
   minerals: boolean;
   fires: boolean;
+  rfSignals: boolean;
   // Data source layers
   ucdpEvents: boolean;
   displacement: boolean;
@@ -1272,4 +1273,17 @@ export interface MapDatacenterCluster {
   existingCount?: number;
   plannedCount?: number;
   sampled?: boolean;
+}
+
+export interface RFSignal {
+  id: string;
+  type: 'wifi' | 'bluetooth' | 'cellular' | 'rf';
+  name: string;
+  ssid?: string;
+  mac?: string;
+  strength: number; // -100 to 0 dBm
+  lat: number;
+  lon: number;
+  timestamp: Date;
+  frequency?: number;
 }

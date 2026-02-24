@@ -1,0 +1,11 @@
+1216-
+1217-Transactions are sampled at 10% to balance observability with cost. Release tracking (`worldmonitor@{version}`) enables regression detection across deployments.
+1218-
+1219----
+1220-
+1221:## Monolithic Architecture (Docker)
+1222-
+1223-The project is now a monolith including multiple integrated backends:
+1224-- **GeoSentinel**: Geospatial tracking and AI OSINT.
+1225-- **WireTapper**: Wireless signal intelligence.
+1226-- **PentAGI / PentestGPT**: Autonomous security operations.

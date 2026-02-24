@@ -41,3 +41,4 @@ export * from './LanguageSelector';
 export * from './RelationshipGraph';
 export * from './SignalIntelPanel';
 export * from './PentestPanel';
+export * from './CommandConsole';

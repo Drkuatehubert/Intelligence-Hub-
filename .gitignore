@@ -1,31 +1,30 @@
+# Node
 node_modules/
-.idea/
 dist/
+build/
+.npm
+.eslintcache
+
+# Rust / Tauri
+target/
+src-tauri/target/
+src-tauri/icons/
+
+# Testing
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+e2e/map-harness.spec.ts-snapshots/
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Misc
 *.log
 .env
-.env.local
-.playwright-mcp/
-.vercel
-api/\[domain\]/v1/\[rpc\].js
-api/\[\[...path\]\].js
-.claude/
-.cursor/
-CLAUDE.md
-.env.vercel-backup
-.env.vercel-export
-.agent/
-.factory/
-.windsurf/
-skills/
-ideas/
-docs/internal/
-test-results/
-src-tauri/sidecar/node/*
-!src-tauri/sidecar/node/.gitkeep
-
-# AI planning session state (not source code)
-.planning/
-
-# Compiled sebuf gateway bundle (built by scripts/build-sidecar-sebuf.mjs)
-api/[[][[].*.js
+.env.*
+!.env.example
+grep_out.txt
+verification/
