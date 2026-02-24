@@ -1,33 +1,41 @@
 version: '3.8'
 
 services:
-  # WorldMonitor Frontend
+  # WorldMonitor Frontend & Unified Proxy
   frontend:
     build: .
     ports:
       - "5173:5173"
     environment:
       - VITE_VARIANT=${VITE_VARIANT:-full}
+      - VITE_GEOSENTINEL_API=http://geosentinel:8000
+      - VITE_WIRETAPPER_API=http://wiretapper:8080
+      - VITE_PENTAGI_API=http://pentagi:8443
     networks:
       - monitor-network
+    restart: always
 
   # GeoSentinel Backend
   geosentinel:
     build: ./backend/geosentinel
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
       - NEWS_API_KEY=${NEWS_API_KEY:-}
       - HF_TOKEN=${HF_TOKEN:-}
+      - DATA_DIR=/data
+    volumes:
+      - shared-intelligence:/data
     networks:
       - monitor-network
+    restart: unless-stopped
 
   # WireTapper Backend
   wiretapper:
     build: ./backend/wiretapper
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
       - WIGLE_API_NAME=${WIGLE_API_NAME:-}
       - WIGLE_API_TOKEN=${WIGLE_API_TOKEN:-}
@@ -35,15 +43,16 @@ services:
       - SHODAN_API_KEY=${SHODAN_API_KEY:-}
     networks:
       - monitor-network
+    restart: unless-stopped
 
-  # PentAGI Services
+  # PentAGI Ecosystem
   pentagi:
     image: vxcontrol/pentagi:latest
-    restart: unless-stopped
-    ports:
-      - "8443:8443"
+    expose:
+      - "8443"
     depends_on:
       - pgvector
+      - neo4j
     environment:
       - DATABASE_URL=postgres://${PENTAGI_POSTGRES_USER:-postgres}:${PENTAGI_POSTGRES_PASSWORD:-postgres}@pgvector:5432/${PENTAGI_POSTGRES_DB:-pentagidb}?sslmode=disable
       - DOCKER_HOST=unix:///var/run/docker.sock
@@ -52,6 +61,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - monitor-network
+    restart: unless-stopped
 
   pgvector:
     image: vxcontrol/pgvector:latest
@@ -64,19 +74,8 @@ services:
     networks:
       - monitor-network
 
-  scraper:
-    image: vxcontrol/scraper:latest
-    ports:
-      - "9443:443"
-    networks:
-      - monitor-network
-
   neo4j:
     image: neo4j:5.26.2
-    restart: unless-stopped
-    ports:
-      - "7474:7474"
-      - "7687:7687"
     environment:
       - NEO4J_AUTH=${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-devpassword}
     volumes:
@@ -84,34 +83,13 @@ services:
     networks:
       - monitor-network
 
-  graphiti:
-    image: vxcontrol/graphiti:latest
-    restart: unless-stopped
-    depends_on:
-      - neo4j
-    ports:
-      - "8005:8000"
-    environment:
-      - NEO4J_URI=bolt://neo4j:7687
-      - NEO4J_USER=${NEO4J_USER:-neo4j}
-      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-devpassword}
-      - OPENAI_API_KEY=${OPEN_AI_KEY:-}
-    networks:
-      - monitor-network
-
-  # PentestGPT
+  # PentestGPT Agent
   pentestgpt:
     build: ./backend/pentestgpt
     volumes:
       - ./backend/pentestgpt/workspace:/workspace
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
     environment:
-      - PENTESTGPT_AUTH_MODE=${PENTESTGPT_AUTH_MODE:-manual}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
-      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
     networks:
       - monitor-network
 
@@ -123,3 +101,4 @@ volumes:
   pentagi-data:
   pgvector-data:
   neo4j-data:
+  shared-intelligence:

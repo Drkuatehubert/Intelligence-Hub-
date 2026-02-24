@@ -1,10 +1,1 @@
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": { "type": "Polygon", "coordinates": [[[30, 20], [50, 20], [50, 40], [30, 40], [30, 20]]] },
-      "properties": { "id": "grid_mena_1", "name": "MENA Sector Alpha", "status": "Active", "priority": "High" }
-    }
-  ]
-}
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"name": "Global Surveillance Grid"}, "geometry": {"type": "Polygon", "coordinates": [[[-180, -90], [180, -90], [180, 90], [-180, 90], [-180, -90]]]}}]}
