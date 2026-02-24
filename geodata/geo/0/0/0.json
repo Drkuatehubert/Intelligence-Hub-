@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "TEST-01", "name": "Initial Surveillance Point" },
+      "geometry": { "type": "Point", "coordinates": [0, 0] }
+    }
+  ]
+}
