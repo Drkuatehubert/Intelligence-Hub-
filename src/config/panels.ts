@@ -316,6 +316,7 @@ const FINANCE_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,
@@ -357,6 +358,7 @@ const FINANCE_MOBILE_MAP_LAYERS: MapLayers = {
   spaceports: false,
   minerals: false,
   fires: false,
+  rfSignals: false,
   // Data source layers
   ucdpEvents: false,
   displacement: false,

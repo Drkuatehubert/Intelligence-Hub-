@@ -129,7 +129,12 @@
     "techReadiness": "Tech Readiness Index",
     "gccInvestments": "GCC Investments",
     "geoHubs": "Geopolitical Hubs",
-    "liveWebcams": "Live Webcams"
+    "liveWebcams": "Live Webcams",
+    "signalIntel": "Signal Intelligence",
+    "pentestMonitor": "Autonomous Pentest",
+    "agentLogs": "Agent Activity Logs",
+    "relationshipGraph": "Relationship Graph",
+    "commandConsole": "Tactical Console"
   },
   "modals": {
     "search": {

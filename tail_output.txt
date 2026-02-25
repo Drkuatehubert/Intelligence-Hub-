@@ -1,0 +1,20 @@
+      this.moveTimeoutId = null;
+    }
+
+    this.stopPulseAnimation();
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
+
+    this.layerCache.clear();
+
+    this.deckOverlay?.finalize();
+    this.deckOverlay = null;
+    this.maplibreMap?.remove();
+    this.maplibreMap = null;
+
+    this.container.innerHTML = '';
+  }
+}

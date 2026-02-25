@@ -1,0 +1,20 @@
+
+  public setDisplacementFlows(flows: DisplacementFlow[]): void {
+    this.displacementFlows = flows;
+    this.render();
+  }
+
+  public setClimateAnomalies(anomalies: ClimateAnomaly[]): void {
+    this.climateAnomalies = anomalies;
+    this.render();
+  }
+
+  public setRfSignals(signals: RFSignal[]): void {
+    this.rfSignals = signals;
+    this.render();
+  }
+
+  public setRfSignals(signals: RFSignal[]): void {
+    this.rfSignals = signals;
+    this.render();
+  }

@@ -8,12 +8,15 @@ const WIRETAPPER_BASE = import.meta.env.VITE_WIRETAPPER_URL || 'http://localhost
 const PENTAGI_BASE = import.meta.env.VITE_PENTAGI_URL || 'http://localhost:8443';
 
 export interface WirelessDevice {
+  id?: string;
   lat: number;
   lon: number;
   ssid?: string;
   bssid?: string;
   vendor?: string;
+   name?: string;
   signal?: number;
+  rssi?: number; // Alias for signal
   type: string;
   timestamp?: string;
 }
