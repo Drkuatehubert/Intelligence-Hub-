@@ -34,6 +34,8 @@ import type {
   CyberThreat,
   CableHealthRecord,
   RFSignal,
+  TimeRange,
+  MapView as DeckMapView,
 } from '@/types';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { DisplacementFlow } from '@/services/displacement';
@@ -72,6 +74,8 @@ import {
   COMMODITY_HUBS,
   GULF_INVESTMENTS,
 } from '@/config';
+import { MAJOR_SATELLITES, type Satellite } from '@/config/satellites';
+import { TRAFFIC_PATHS, type TrafficPath } from '@/config/traffic';
 import type { GulfInvestment } from '@/types';
 import { MapPopup, type PopupType } from './MapPopup';
 import {
@@ -85,9 +89,9 @@ import { getCountryScore } from '@/services/country-instability';
 import { getAlertsNearLocation } from '@/services/geo-convergence';
 import { getCountriesGeoJson, getCountryAtCoordinates } from '@/services/country-geometry';
 
-export type TimeRange = '1h' | '6h' | '24h' | '48h' | '7d' | 'all';
-export type DeckMapView = 'global' | 'america' | 'mena' | 'eu' | 'asia' | 'latam' | 'africa' | 'oceania';
 type MapInteractionMode = 'flat' | '3d';
+
+export type { DeckMapView };
 
 export interface CountryClickPayload {
   lat: number;
@@ -131,6 +135,12 @@ const VIEW_PRESETS: Record<DeckMapView, { longitude: number; latitude: number; z
   latam: { longitude: -60, latitude: -15, zoom: 3 },
   africa: { longitude: 20, latitude: 5, zoom: 3 },
   oceania: { longitude: 135, latitude: -25, zoom: 3.5 },
+  kyiv: { longitude: 30.5234, latitude: 50.4501, zoom: 10 },
+  taipei: { longitude: 121.5654, latitude: 25.033, zoom: 10 },
+  hormuz: { longitude: 56.25, latitude: 26.6, zoom: 8 },
+  suez: { longitude: 32.3, latitude: 30.5, zoom: 8 },
+  dc: { longitude: -77.0369, latitude: 38.9072, zoom: 11 },
+  kremlin: { longitude: 37.6173, latitude: 55.7512, zoom: 12 },
 };
 
 const MAP_INTERACTION_MODE: MapInteractionMode =
@@ -270,6 +280,7 @@ export class DeckGLMap {
   private displacementFlows: DisplacementFlow[] = [];
   private climateAnomalies: ClimateAnomaly[] = [];
   private rfSignals: RFSignal[] = [];
+  private simulatedSatellites: Satellite[] = [...MAJOR_SATELLITES];
 
   // Country highlight state
   private countryGeoJsonLoaded = false;
@@ -1140,6 +1151,16 @@ export class DeckGLMap {
     // Gulf FDI investments layer
     if (mapLayers.gulfInvestments) {
       layers.push(this.createGulfInvestmentsLayer());
+    }
+
+    // Satellites layer
+    if (mapLayers.satellites) {
+      layers.push(this.createSatellitesLayer());
+    }
+
+    // Traffic layer
+    if (mapLayers.traffic) {
+      layers.push(this.createTrafficLayer());
     }
 
     // RF Signals layer (WireTapper integration)
@@ -2169,6 +2190,56 @@ export class DeckGLMap {
     return layers;
   }
 
+  private createSatellitesLayer(): Layer {
+    const now = this.pulseTime || Date.now();
+    // Update simulated satellite positions based on time
+    const animatedSats = this.simulatedSatellites.map(sat => {
+      const elapsedSec = (now - this.startupTime) / 1000;
+      // Simple orbital simulation: change longitude over time
+      let newLon = sat.lon + (sat.velocity * elapsedSec);
+      while (newLon > 180) newLon -= 360;
+      while (newLon < -180) newLon += 360;
+
+      // Add slight latitude oscillation
+      const newLat = sat.lat + Math.sin(elapsedSec * 0.05) * 5;
+
+      return { ...sat, lat: newLat, lon: newLon };
+    });
+
+    return new ScatterplotLayer<Satellite>({
+      id: 'satellites-layer',
+      data: animatedSats,
+      getPosition: d => [d.lon, d.lat],
+      getRadius: d => d.type === 'station' ? 15000 : 8000,
+      getFillColor: d => {
+        switch (d.type) {
+          case 'station': return [0, 210, 255, 220] as [number, number, number, number];
+          case 'mil': return [255, 50, 50, 200] as [number, number, number, number];
+          case 'gps': return [255, 200, 0, 200] as [number, number, number, number];
+          default: return [220, 220, 220, 180] as [number, number, number, number];
+        }
+      },
+      pickable: true,
+      stroked: true,
+      getLineColor: [255, 255, 255, 100],
+      lineWidthMinPixels: 1,
+      updateTriggers: { getPosition: now }
+    });
+  }
+
+  private createTrafficLayer(): Layer {
+    return new PathLayer<TrafficPath>({
+      id: 'traffic-layer',
+      data: TRAFFIC_PATHS,
+      getPath: d => d.path,
+      getColor: d => [...d.color, 200] as [number, number, number, number],
+      getWidth: 4,
+      widthMinPixels: 2,
+      capRounded: true,
+      jointRounded: true,
+    });
+  }
+
   private createRfSignalsLayer(): Layer {
     return new ScatterplotLayer<RFSignal>({
       id: 'rf-signals-layer',
@@ -2237,7 +2308,8 @@ export class DeckGLMap {
   private needsPulseAnimation(now = Date.now()): boolean {
     return this.hasRecentNews(now)
       || this.hasRecentRiot(now)
-      || this.hotspots.some(h => h.hasBreaking);
+      || this.hotspots.some(h => h.hasBreaking)
+      || this.state.layers.satellites;
   }
 
   private syncPulseAnimation(now = Date.now()): void {
@@ -2732,6 +2804,17 @@ export class DeckGLMap {
           <option value="oceania">${t('components.deckgl.views.oceania')}</option>
         </select>
       </div>
+      <div class="landmark-selector">
+        <select class="landmark-select">
+          <option value="" disabled selected>LANDMARKS</option>
+          <option value="kyiv">Kyiv, UA</option>
+          <option value="taipei">Taipei, TW</option>
+          <option value="hormuz">Hormuz</option>
+          <option value="suez">Suez Canal</option>
+          <option value="dc">Washington DC</option>
+          <option value="kremlin">Kremlin</option>
+        </select>
+      </div>
     `;
 
     this.container.appendChild(controls);
@@ -2748,6 +2831,15 @@ export class DeckGLMap {
     viewSelect.value = this.state.view;
     viewSelect.addEventListener('change', () => {
       this.setView(viewSelect.value as DeckMapView);
+    });
+
+    const landmarkSelect = controls.querySelector('.landmark-select') as HTMLSelectElement;
+    landmarkSelect.addEventListener('change', () => {
+      if (landmarkSelect.value) {
+        this.setView(landmarkSelect.value as DeckMapView);
+        // Reset dropdown
+        setTimeout(() => { landmarkSelect.value = ''; }, 1000);
+      }
     });
   }
 
@@ -2844,6 +2936,8 @@ export class DeckGLMap {
         { key: 'fires', label: t('components.deckgl.layers.fires'), icon: '&#128293;' },
         { key: 'waterways', label: t('components.deckgl.layers.strategicWaterways'), icon: '&#9875;' },
         { key: 'rfSignals', label: t('components.deckgl.layers.rfSignals'), icon: '&#128246;' },
+        { key: 'satellites', label: t('components.deckgl.layers.satellites'), icon: '&#128225;' },
+        { key: 'traffic', label: t('components.deckgl.layers.traffic'), icon: '&#128663;' },
         { key: 'economic', label: t('components.deckgl.layers.economicCenters'), icon: '&#128176;' },
         { key: 'minerals', label: t('components.deckgl.layers.criticalMinerals'), icon: '&#128142;' },
       ];

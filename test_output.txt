@@ -1,0 +1,94 @@
+
+Running 4 tests using 1 worker
+
+  ✘  1 [chromium] › e2e/comprehensive.spec.ts:4:3 › Unified Platform Variants › should render Wireless Intelligence variant correctly (4ms)
+  ✘  2 [chromium] › e2e/comprehensive.spec.ts:20:3 › Unified Platform Variants › should render Pentest Operations variant correctly (3ms)
+  ✘  3 [chromium] › e2e/tactical.spec.ts:5:3 › Tactical Intelligence Platform E2E › verify Gotham tactical styling (3ms)
+  ✘  4 [chromium] › e2e/tactical.spec.ts:14:3 › Tactical Intelligence Platform E2E › verify specialized variants (Wireless/Pentest) (4ms)
+
+
+  1) [chromium] › e2e/comprehensive.spec.ts:4:3 › Unified Platform Variants › should render Wireless Intelligence variant correctly
+
+    Error: browserType.launch: Executable doesn't exist at /home/jules/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/comprehensive-Unified-Plat-79a7c-elligence-variant-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/comprehensive-Unified-Plat-79a7c-elligence-variant-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › e2e/comprehensive.spec.ts:20:3 › Unified Platform Variants › should render Pentest Operations variant correctly
+
+    Error: browserType.launch: Executable doesn't exist at /home/jules/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/comprehensive-Unified-Plat-46f3f-perations-variant-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/comprehensive-Unified-Plat-46f3f-perations-variant-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e/tactical.spec.ts:5:3 › Tactical Intelligence Platform E2E › verify Gotham tactical styling
+
+    Error: browserType.launch: Executable doesn't exist at /home/jules/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/tactical-Tactical-Intellig-67d01-ify-Gotham-tactical-styling-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/tactical-Tactical-Intellig-67d01-ify-Gotham-tactical-styling-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › e2e/tactical.spec.ts:14:3 › Tactical Intelligence Platform E2E › verify specialized variants (Wireless/Pentest)
+
+    Error: browserType.launch: Executable doesn't exist at /home/jules/.cache/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/tactical-Tactical-Intellig-079d6--variants-Wireless-Pentest--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/tactical-Tactical-Intellig-079d6--variants-Wireless-Pentest--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › e2e/comprehensive.spec.ts:4:3 › Unified Platform Variants › should render Wireless Intelligence variant correctly
+    [chromium] › e2e/comprehensive.spec.ts:20:3 › Unified Platform Variants › should render Pentest Operations variant correctly
+    [chromium] › e2e/tactical.spec.ts:5:3 › Tactical Intelligence Platform E2E › verify Gotham tactical styling
+    [chromium] › e2e/tactical.spec.ts:14:3 › Tactical Intelligence Platform E2E › verify specialized variants (Wireless/Pentest)

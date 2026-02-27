@@ -130,6 +130,7 @@
     "gccInvestments": "GCC Investments",
     "geoHubs": "Geopolitical Hubs",
     "liveWebcams": "Live Webcams",
+    "satellites": "Satellite Tracking",
     "signalIntel": "Signal Intelligence",
     "pentestMonitor": "Autonomous Pentest",
     "agentLogs": "Agent Activity Logs",
@@ -711,7 +712,9 @@
         "financialCenters": "Financial Centers",
         "centralBanks": "Central Banks",
         "commodityHubs": "Commodity Hubs",
-        "gulfInvestments": "GCC Investments"
+        "gulfInvestments": "GCC Investments",
+        "satellites": "Satellite Tracking",
+        "traffic": "Street Traffic"
       },
       "tooltip": {
         "earthquake": "Earthquake",

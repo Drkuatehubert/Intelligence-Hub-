@@ -5,6 +5,7 @@
 import { isMobileDevice } from '@/utils';
 import { MapComponent } from './Map';
 import { DeckGLMap, type DeckMapView, type CountryClickPayload } from './DeckGLMap';
+import { TacticalModes, type TacticalMode } from './TacticalModes';
 import type {
   MapLayers,
   Hotspot,
@@ -25,6 +26,9 @@ import type {
   UcdpGeoEvent,
   CyberThreat,
   CableHealthRecord,
+  RFSignal,
+  TimeRange,
+  MapView,
 } from '@/types';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { DisplacementFlow } from '@/services/displacement';
@@ -32,8 +36,7 @@ import type { Earthquake } from '@/services/earthquakes';
 import type { ClimateAnomaly } from '@/services/climate';
 import type { WeatherAlert } from '@/services/weather';
 
-export type TimeRange = '1h' | '6h' | '24h' | '48h' | '7d' | 'all';
-export type MapView = 'global' | 'america' | 'mena' | 'eu' | 'asia' | 'latam' | 'africa' | 'oceania';
+export type { MapView, TimeRange };
 
 export interface MapContainerState {
   zoom: number;
@@ -65,6 +68,7 @@ export class MapContainer {
   private isMobile: boolean;
   private deckGLMap: DeckGLMap | null = null;
   private svgMap: MapComponent | null = null;
+  private tacticalModes: TacticalModes | null = null;
   private initialState: MapContainerState;
   private useDeckGL: boolean;
 
@@ -113,6 +117,10 @@ export class MapContainer {
           ...this.initialState,
           view: this.initialState.view as DeckMapView,
         });
+
+        // Initialize tactical modes UI
+        this.tacticalModes = new TacticalModes(this.container);
+        this.tacticalModes.setOnChange((mode) => this.applyTacticalMode(mode));
       } catch (error) {
         console.warn('[MapContainer] DeckGL initialization failed, falling back to SVG map', error);
         this.initSvgMap('[MapContainer] Initializing SVG map (DeckGL fallback mode)');
@@ -563,6 +571,18 @@ export class MapContainer {
   public setRenderPaused(paused: boolean): void {
     if (this.useDeckGL) {
       this.deckGLMap?.setRenderPaused(paused);
+    }
+  }
+
+  private applyTacticalMode(mode: TacticalMode): void {
+    const wrapper = this.container.querySelector('.deckgl-map-wrapper');
+    if (!wrapper) return;
+
+    // Clear previous modes
+    wrapper.classList.remove('map-mode-crt', 'map-mode-nv', 'map-mode-flir');
+
+    if (mode !== 'none') {
+      wrapper.classList.add(`map-mode-${mode}`);
     }
   }
 

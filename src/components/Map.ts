@@ -4,7 +4,15 @@ import { escapeHtml } from '@/utils/sanitize';
 import { getCSSColor } from '@/utils';
 import type { Topology, GeometryCollection } from 'topojson-specification';
 import type { Feature, Geometry } from 'geojson';
-import type { MapLayers, Hotspot, NewsItem, InternetOutage, RelatedAsset, AssetType, AisDisruptionEvent, AisDensityZone, CableAdvisory, RepairShip, SocialUnrestEvent, MilitaryFlight, MilitaryVessel, MilitaryFlightCluster, MilitaryVesselCluster, NaturalEvent, CyberThreat, CableHealthRecord } from '@/types';
+import type {
+  MapLayers, Hotspot, NewsItem, InternetOutage, RelatedAsset, AssetType,
+  AisDisruptionEvent, AisDensityZone, CableAdvisory, RepairShip,
+  SocialUnrestEvent, MilitaryFlight, MilitaryVessel, MilitaryFlightCluster,
+  MilitaryVesselCluster, NaturalEvent, CyberThreat, CableHealthRecord,
+  TimeRange, MapView
+} from '@/types';
+
+export type { MapView, TimeRange };
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { Earthquake } from '@/services/earthquakes';
 import type { TechHubActivity } from '@/services/tech-activity';
@@ -53,9 +61,6 @@ import {
 import { getCountryScore } from '@/services/country-instability';
 import { getAlertsNearLocation } from '@/services/geo-convergence';
 import { t } from '@/services/i18n';
-
-export type TimeRange = '1h' | '6h' | '24h' | '48h' | '7d' | 'all';
-export type MapView = 'global' | 'america' | 'mena' | 'eu' | 'asia' | 'latam' | 'africa' | 'oceania';
 
 interface MapState {
   zoom: number;
@@ -2876,6 +2881,12 @@ export class MapComponent {
       latam: { zoom: 2.0, pan: { x: 120, y: -100 } },
       africa: { zoom: 2.2, pan: { x: -40, y: -30 } },
       oceania: { zoom: 2.2, pan: { x: -420, y: -100 } },
+      kyiv: { zoom: 5, pan: { x: -100, y: -200 } },
+      taipei: { zoom: 5, pan: { x: -500, y: -50 } },
+      hormuz: { zoom: 5, pan: { x: -200, y: -50 } },
+      suez: { zoom: 5, pan: { x: -100, y: -80 } },
+      dc: { zoom: 5, pan: { x: 300, y: -100 } },
+      kremlin: { zoom: 5, pan: { x: -150, y: -220 } },
     };
 
     const settings = viewSettings[view];

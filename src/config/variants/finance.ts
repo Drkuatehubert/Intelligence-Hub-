@@ -197,6 +197,9 @@ export const DEFAULT_MAP_LAYERS: MapLayers = {
   ucdpEvents: false,
   displacement: false,
   climate: false,
+  rfSignals: false,
+  satellites: false,
+  traffic: false,
   // Tech layers (disabled in finance variant)
   startupHubs: false,
   cloudRegions: false,
@@ -238,6 +241,9 @@ export const MOBILE_DEFAULT_MAP_LAYERS: MapLayers = {
   ucdpEvents: false,
   displacement: false,
   climate: false,
+  rfSignals: false,
+  satellites: false,
+  traffic: false,
   // Tech layers (disabled)
   startupHubs: false,
   cloudRegions: false,

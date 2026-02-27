@@ -3,9 +3,13 @@
  * Interconnects WorldMonitor with integrated OSINT and Security backends.
  */
 
-const GEOSENTINEL_BASE = import.meta.env.VITE_GEOSENTINEL_URL || 'http://localhost:8000';
-const WIRETAPPER_BASE = import.meta.env.VITE_WIRETAPPER_URL || 'http://localhost:8080';
-const PENTAGI_BASE = import.meta.env.VITE_PENTAGI_URL || 'http://localhost:8443';
+const GEOSENTINEL_BASE = import.meta.env.VITE_GEOSENTINEL_API || import.meta.env.VITE_GEOSENTINEL_URL || 'http://localhost:8000';
+const WIRETAPPER_BASE = import.meta.env.VITE_WIRETAPPER_API || import.meta.env.VITE_WIRETAPPER_URL || 'http://localhost:8080';
+const PENTAGI_BASE = import.meta.env.VITE_PENTAGI_API || import.meta.env.VITE_PENTAGI_URL || 'http://localhost:8443';
+
+// Use the base URL to suppress unused variable error if needed,
+// though we'll likely use it soon for real PentAGI calls.
+console.log('[UnifiedBackend] Initialized with PentAGI base:', PENTAGI_BASE);
 
 export interface WirelessDevice {
   id?: string;

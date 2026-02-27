@@ -1,5 +1,4 @@
-import type { MapLayers } from '@/types';
-import type { MapView, TimeRange } from '@/components/Map';
+import type { MapLayers, MapView, TimeRange } from '@/types';
 
 const LAYER_KEYS: (keyof MapLayers)[] = [
   'conflicts',
@@ -32,10 +31,13 @@ const LAYER_KEYS: (keyof MapLayers)[] = [
   'accelerators',
   'techHQs',
   'techEvents',
+  'rfSignals',
+  'satellites',
+  'traffic',
 ];
 
 const TIME_RANGES: TimeRange[] = ['1h', '6h', '24h', '48h', '7d', 'all'];
-const VIEW_VALUES: MapView[] = ['global', 'america', 'mena', 'eu', 'asia', 'latam', 'africa', 'oceania'];
+const VIEW_VALUES: MapView[] = ['global', 'america', 'mena', 'eu', 'asia', 'latam', 'africa', 'oceania', 'kyiv', 'taipei', 'hormuz', 'suez', 'dc', 'kremlin'];
 
 export interface ParsedMapUrlState {
   view?: MapView;

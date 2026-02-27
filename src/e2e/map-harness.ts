@@ -171,6 +171,9 @@ const allLayersEnabled: MapLayers = {
   centralBanks: true,
   commodityHubs: true,
   gulfInvestments: true,
+  rfSignals: true,
+  satellites: true,
+  traffic: true,
 };
 
 const allLayersDisabled: MapLayers = {
@@ -209,6 +212,9 @@ const allLayersDisabled: MapLayers = {
   centralBanks: false,
   commodityHubs: false,
   gulfInvestments: false,
+  rfSignals: false,
+  satellites: false,
+  traffic: false,
 };
 
 const SEEDED_NEWS_LOCATIONS: Array<{

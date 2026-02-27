@@ -40,6 +40,11 @@ const WEBCAM_FEEDS: WebcamFeed[] = [
   { id: 'tokyo', city: 'Tokyo', country: 'Japan', region: 'asia', channelHandle: '@TokyoLiveCam4K', fallbackVideoId: '4pu9sF5Qssw' },
   { id: 'seoul', city: 'Seoul', country: 'South Korea', region: 'asia', channelHandle: '@UNvillage_live', fallbackVideoId: '-JhoMGoAfFc' },
   { id: 'sydney', city: 'Sydney', country: 'Australia', region: 'asia', channelHandle: '@WebcamSydney', fallbackVideoId: '7pcL-0Wo77U' },
+  // Strategic Chokepoints
+  { id: 'suez', city: 'Suez Canal', country: 'Egypt', region: 'middle-east', channelHandle: '@SuezCanalAuthority', fallbackVideoId: 'T077E8G27Cc' },
+  { id: 'hormuz', city: 'Strait of Hormuz', country: 'Oman', region: 'middle-east', channelHandle: '@LiveCam', fallbackVideoId: 'f0XG5736fS0' },
+  { id: 'taiwan-strait', city: 'Taiwan Strait', country: 'Taiwan', region: 'asia', channelHandle: '@TaiwanLive', fallbackVideoId: 'K_I7L9K9_R0' },
+  { id: 'panama', city: 'Panama Canal', country: 'Panama', region: 'americas', channelHandle: '@PanamaCanal', fallbackVideoId: 'E_71_f0v6A0' },
 ];
 
 const MAX_GRID_CELLS = 4;

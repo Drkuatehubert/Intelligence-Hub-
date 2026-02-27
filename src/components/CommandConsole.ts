@@ -1,19 +1,15 @@
-export class CommandConsole {
-  private element: HTMLElement;
+import { Panel } from './Panel';
 
+export class CommandConsole extends Panel {
   constructor(id: string, label: string) {
-    this.element = document.createElement('div');
-    this.element.className = 'panel terminal';
-    this.element.setAttribute('data-panel', id);
-    this.element.innerHTML = `
-      <div class="panel-header">
-        <span>⌨️ ${label}</span>
-      </div>
+    super({ id, title: label, className: 'terminal' });
+
+    this.content.innerHTML = `
       <div class="terminal-output" style="height: 100px; overflow-y: auto; margin-bottom: 5px;"></div>
       <input type="text" class="terminal-input" placeholder="Enter tactical command..." style="width: 100%; background: #000; color: #00ff88; border: 1px solid #1f242d; outline: none; font-family: monospace;" />
     `;
 
-    const input = this.element.querySelector('.terminal-input') as HTMLInputElement;
+    const input = this.content.querySelector('.terminal-input') as HTMLInputElement;
     input?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         this.log(`EXECUTING: ${input.value}`);
@@ -25,7 +21,7 @@ export class CommandConsole {
   public getElement() { return this.element; }
 
   public log(msg: string) {
-    const output = this.element.querySelector('.terminal-output');
+    const output = this.content.querySelector('.terminal-output');
     if (!output) return;
     const line = document.createElement('div');
     line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
@@ -33,7 +29,4 @@ export class CommandConsole {
     output.scrollTop = output.scrollHeight;
   }
 
-  public toggle(enabled: boolean) {
-    this.element.classList.toggle('hidden', !enabled);
-  }
 }

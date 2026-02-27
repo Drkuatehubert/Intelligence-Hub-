@@ -479,6 +479,9 @@ export interface PanelConfig {
   priority?: number;
 }
 
+export type TimeRange = '1h' | '6h' | '24h' | '48h' | '7d' | 'all';
+export type MapView = 'global' | 'america' | 'mena' | 'eu' | 'asia' | 'latam' | 'africa' | 'oceania' | 'kyiv' | 'taipei' | 'hormuz' | 'suez' | 'dc' | 'kremlin';
+
 export interface MapLayers {
   conflicts: boolean;
   bases: boolean;
@@ -503,6 +506,8 @@ export interface MapLayers {
   minerals: boolean;
   fires: boolean;
   rfSignals: boolean;
+  satellites: boolean;
+  traffic: boolean;
   // Data source layers
   ucdpEvents: boolean;
   displacement: boolean;

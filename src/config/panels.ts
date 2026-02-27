@@ -72,7 +72,8 @@ const FULL_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -114,7 +115,8 @@ const FULL_MOBILE_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -197,7 +199,8 @@ const TECH_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -239,7 +242,8 @@ const TECH_MOBILE_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -317,7 +321,8 @@ const FINANCE_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -350,7 +355,7 @@ const FINANCE_MOBILE_MAP_LAYERS: MapLayers = {
   waterways: false,
   outages: true,
   cyberThreats: false,
-  datacenters: false,
+  datacenters: true,
   protests: false,
   flights: false,
   military: false,
@@ -359,7 +364,8 @@ const FINANCE_MOBILE_MAP_LAYERS: MapLayers = {
   minerals: false,
   fires: false,
   rfSignals: false,
-  // Data source layers
+  satellites: false,
+  traffic: false,
   ucdpEvents: false,
   displacement: false,
   climate: false,
@@ -396,6 +402,8 @@ const WIRELESS_MAP_LAYERS: MapLayers = {
   cyberThreats: true,
   datacenters: true,
   rfSignals: true,
+  satellites: true,
+  traffic: false,
 };
 
 // ============================================
@@ -414,6 +422,8 @@ const PENTEST_MAP_LAYERS: MapLayers = {
   ...FULL_MAP_LAYERS,
   cyberThreats: true,
   datacenters: true,
+  satellites: false,
+  traffic: false,
 };
 
 // ============================================

@@ -1,0 +1,5 @@
+
+> world-monitor@2.5.6 build
+> tsc && vite build
+
+sh: 1: tsc: not found

@@ -1,4 +1,4 @@
-import type { NewsItem, Monitor, PanelConfig, MapLayers, RelatedAsset, InternetOutage, SocialUnrestEvent, MilitaryFlight, MilitaryVessel, MilitaryFlightCluster, MilitaryVesselCluster, CyberThreat } from '@/types';
+import type { NewsItem, Monitor, PanelConfig, MapLayers, RelatedAsset, InternetOutage, SocialUnrestEvent, MilitaryFlight, MilitaryVessel, MilitaryFlightCluster, MilitaryVesselCluster, CyberThreat, MapView, TimeRange } from '@/types';
 import {
   FEEDS,
   INTEL_SOURCES,
@@ -42,8 +42,6 @@ import { escapeHtml } from '@/utils/sanitize';
 import type { ParsedMapUrlState } from '@/utils';
 import {
   MapContainer,
-  type MapView,
-  type TimeRange,
   NewsPanel,
   MarketPanel,
   HeatmapPanel,
@@ -84,6 +82,7 @@ import {
   RelationshipGraph,
   SignalIntelPanel,
   PentestPanel,
+  CommandConsole,
 } from '@/components';
 import type { SearchResult } from '@/components/SearchModal';
 import { unifiedBackend } from '@/services/unified-backend';
@@ -336,7 +335,7 @@ export class App {
 
   public async init(): Promise<void> {
     const initStart = performance.now();
-    await initDB();
+    await (initDB as unknown as () => Promise<void>)();
     await initI18n();
 
     // Initialize ML worker (desktop only - automatically disabled on mobile)
@@ -835,7 +834,8 @@ export class App {
         const postures = posturePanel?.getPostures() || [];
         const data = collectStoryData(code, name, this.latestClusters, postures, this.latestPredictions, signals, convergence);
         const canvas = await renderStoryToCanvas(data);
-        const dataUrl = canvas.toDataURL('image/png');
+        if (!canvas) return;
+        const dataUrl = (canvas as HTMLCanvasElement).toDataURL('image/png');
         const a = document.createElement('a');
         a.href = dataUrl;
         a.download = `country-brief-${code.toLowerCase()}-${Date.now()}.png`;
@@ -913,13 +913,13 @@ export class App {
     const marketClient = new MarketServiceClient('', { fetch: (...args) => globalThis.fetch(...args) });
     const stockPromise = marketClient.getCountryStockIndex({ countryCode: code })
       .then((resp) => ({
-        available: resp.available,
-        code: resp.code,
-        symbol: resp.symbol,
-        indexName: resp.indexName,
-        price: String(resp.price),
-        weekChangePercent: String(resp.weekChangePercent),
-        currency: resp.currency,
+        available: Boolean(resp.available),
+        code: resp.code || '',
+        symbol: resp.symbol || '',
+        indexName: resp.indexName || '',
+        price: String(resp.price || '0'),
+        weekChangePercent: String(resp.weekChangePercent || '0'),
+        currency: resp.currency || '',
       }))
       .catch(() => ({ available: false as const, code: '', symbol: '', indexName: '', price: '0', weekChangePercent: '0', currency: '' }));
 

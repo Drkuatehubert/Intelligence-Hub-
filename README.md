@@ -68,6 +68,10 @@ This project is a **Monolithic Integration** of five distinct intelligence and s
 ### Tactical UI & Palantir Integration
 
 - **Palantir-Inspired Aesthetic** — High-density, tactical dark interface ("Gotham" style) designed for professional situational awareness and intelligence analysis.
+- **Tactical Visual Modes** — Real-time map filters including **CRT** (scanlines), **Night Vision** (green phosphor), and **FLIR** (thermal imaging) for enhanced situational immersion.
+- **Live Satellite Tracking** — Real-time orbital tracking of major satellites including the ISS, Hubble, and Starlink constellations.
+- **Street Traffic Simulation** — Dynamic vehicle flow simulation in major global cities and strategic hotspots (Taipei, Seoul, Kyiv, etc.).
+- **Strategic Camera Presets** — Instant navigation to high-value landmarks including the Kremlin, Washington DC, Suez Canal, and the Strait of Hormuz.
 - **Unified Command Console** — Integrated terminal for interacting with AI agents (GeoSential AI, PentAGI) and executing cross-platform OSINT searches.
 - **Dynamic Relationship Mapping** — Node-link visualizations of entity connections, vulnerability chains, and signal correlations.
 - **Signal Intelligence Layer** — Specialized map visualization for passive RF signal detections (WiFi, BT, Cellular) from WireTapper.

@@ -1,14 +1,10 @@
-export class SignalIntelPanel {
-  private element: HTMLElement;
+import { Panel } from './Panel';
 
+export class SignalIntelPanel extends Panel {
   constructor(id: string, label: string) {
-    this.element = document.createElement('div');
-    this.element.className = 'panel';
-    this.element.setAttribute('data-panel', id);
-    this.element.innerHTML = `
-      <div class="panel-header">
-        <span>📶 ${label}</span>
-      </div>
+    super({ id, title: label });
+
+    this.content.innerHTML = `
       <table class="data-table">
         <thead>
           <tr>
@@ -22,10 +18,8 @@ export class SignalIntelPanel {
     `;
   }
 
-  public getElement() { return this.element; }
-
   public updateDevices(devices: any[]) {
-    const body = this.element.querySelector('#signal-body');
+    const body = this.content.querySelector('#signal-body');
     if (!body) return;
     body.innerHTML = devices.map(d => `
       <tr>
@@ -36,7 +30,4 @@ export class SignalIntelPanel {
     `).join('');
   }
 
-  public toggle(enabled: boolean) {
-    this.element.classList.toggle('hidden', !enabled);
-  }
 }
